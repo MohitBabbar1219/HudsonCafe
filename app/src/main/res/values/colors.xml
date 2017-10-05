@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#161925</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="animBackground">#161925</color>
+    <color name="loginBackground">#282d44</color>
+    <color name="appBackground">#23395B</color>
+    <color name="leftOutBlue">#406E8E</color>
+    <color name="logoColor">#8EA8C3</color>
+    <color name="textColor">#CBF7ED</color>
 </resources>
