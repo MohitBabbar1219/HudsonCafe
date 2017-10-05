@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             sp.edit().putString("username", email.substring(0, email.indexOf('@'))).apply();
 
-                            Toast.makeText(LoginActivity.this, "Welcome, " + sp.getString("username", ""), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Welcome " + sp.getString("username", ""), Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                             startActivity(intent);
