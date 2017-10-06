@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackground"
     tools:context="com.mydarkappfactory.hudsoncafe.MenuActivity">
 
-    <TextView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Menu"/>
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/loginBackground"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </RelativeLayout>
