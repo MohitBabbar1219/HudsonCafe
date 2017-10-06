@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void attemptLogin(View view) {
         final String email = emailText.getText().toString();
-        String password = passwordText.getText().toString();
+        final String password = passwordText.getText().toString();
         final SharedPreferences sp = this.getSharedPreferences("com.mydarkappfactory.hudsoncafe", Context.MODE_PRIVATE);
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Hudson", sp.getString("username", sp.getString("username", "")));
 
                             sp.edit().putString("username", email.substring(0, email.indexOf('@'))).apply();
+                            sp.edit().putString("email", email).apply();
+                            sp.edit().putString("password", password).apply();
 
                             Toast.makeText(LoginActivity.this, "Welcome " + sp.getString("username", ""), Toast.LENGTH_SHORT).show();
 
