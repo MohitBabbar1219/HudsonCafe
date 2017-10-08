@@ -5,7 +5,10 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:id="@+id/slideshowImage"/>
+        android:layout_height="450dp"
+        android:src="@drawable/appetizers"
+        android:scaleType="fitCenter"
+        android:id="@+id/slideshowImage"
+        android:contentDescription="Sub menu"/>
 
 </LinearLayout>
