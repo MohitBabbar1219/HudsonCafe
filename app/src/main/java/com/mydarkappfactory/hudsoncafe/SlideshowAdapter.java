@@ -51,6 +51,10 @@ public class SlideshowAdapter extends PagerAdapter{
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent(context, SubmenuActivity.class);
+                intent.putExtra("imgIndex", position);
+                context.startActivity(intent);
             }
         });
 

@@ -7,6 +7,7 @@
     android:background="@color/appBackground"
     tools:context="com.mydarkappfactory.hudsoncafe.MenuActivity">
 
+
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
