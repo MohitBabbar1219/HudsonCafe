@@ -51,6 +51,8 @@ public class SubmenuActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.setCurrentItem(0);
+
     }
 
     @Override
