@@ -22,15 +22,16 @@
         android:background="@color/loginBackground"
         android:padding="30dp"
         android:id="@+id/relativeLayout"
-        android:layout_below="@+id/loginLogo"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp">
+        android:layout_marginBottom="108dp">
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColorHint="#888"
             android:inputType="textEmailAddress"
             android:hint="example@example.com"
             android:textColor="@color/textColor"
@@ -41,10 +42,11 @@
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:padding="10dp"
+            android:textColorHint="#888"
             android:inputType="textPassword"
             android:hint="Password"
             android:textColor="@color/textColor"
@@ -55,12 +57,13 @@
 
         <EditText
             android:id="@+id/confirmPassword"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:padding="10dp"
             android:inputType="textPassword"
             android:hint="Confirm Password"
+            android:textColorHint="#888"
             android:textColor="@color/textColor"
             android:layout_marginTop="20dp"
             android:background="@color/animBackground"
@@ -71,7 +74,7 @@
 
         <Button
             android:id="@+id/registerButt"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Register"
