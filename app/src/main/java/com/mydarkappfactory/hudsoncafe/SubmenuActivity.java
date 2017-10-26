@@ -13,9 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -27,6 +29,7 @@ public class SubmenuActivity extends AppCompatActivity {
     static ArrayList<Dish> dishesA, dishesM, dishesS;
     ArrayList<String> finalizedDishes;
     SharedPreferences sharedPreferences;
+    HashMap<String, String> nameDishJsonPair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,7 @@ public class SubmenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.itemOne:
                 Log.d("Hudson", "item 1");
                 //TODO
@@ -134,35 +137,7 @@ public class SubmenuActivity extends AppCompatActivity {
                 break;
             case R.id.cart:
                 //TODO
-                for(int i = 0; i < dishesM.size(); i++) {
-                    if (dishesM.get(i).getQuantity() > 0) {
-                        Dish dish = dishesM.get(i);
-                        Gson gson = new Gson();
-                        String dishJson = gson.toJson(dish);
-                        finalizedDishes.add(dishJson);
-                    }
-                }
-                for(int i = 0; i < dishesS.size(); i++) {
-                    if (dishesS.get(i).getQuantity() > 0) {
-                        Dish dish = dishesS.get(i);
-                        Gson gson = new Gson();
-                        String dishJson = gson.toJson(dish);
-                        finalizedDishes.add(dishJson);
-                    }
-                }
-                for(int i = 0; i < dishesA.size(); i++) {
-                    if (dishesA.get(i).getQuantity() > 0) {
-                        Dish dish = dishesA.get(i);
-                        Gson gson = new Gson();
-                        String dishJson = gson.toJson(dish);
-                        finalizedDishes.add(dishJson);
-                    }
-                }
-                try {
-                    sharedPreferences.edit().putString("finalizedDishes", ObjectSerializer.serialize(finalizedDishes)).apply();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                hashmapToSP();
                 Intent intent = new Intent(SubmenuActivity.this, CartActivity.class);
                 startActivity(intent);
                 break;
@@ -173,4 +148,18 @@ public class SubmenuActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void hashmapToSP() {
+        if (sharedPreferences.getString("finalizedDishHashmap", "-1").equals("-1")) {
+            nameDishJsonPair = Functions.threeArrayListToHashmap(dishesM, dishesS, dishesA);
+            String hashMapJson = Functions.hashMapToJson(nameDishJsonPair);
+            sharedPreferences.edit().putString("finalizedDishHashmap", hashMapJson).apply();
+        } else {
+            HashMap<String, String> retrievedHashMap = Functions.jsonToHashMap(sharedPreferences.getString("finalizedDishHashmap", "-1"));
+            retrievedHashMap = Functions.updateHashMapFromArrayLists(retrievedHashMap, dishesM, dishesS, dishesA);
+            String hashMapJson = Functions.hashMapToJson(retrievedHashMap);
+            sharedPreferences.edit().putString("finalizedDishHashmap", hashMapJson).apply();
+        }
+    }
+
 }

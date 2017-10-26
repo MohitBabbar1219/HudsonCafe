@@ -15,16 +15,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Mohit on 10/8/2017.
- */
 
-public class ListAdapter extends ArrayAdapter<Dish> {
+public class CartListAdapter extends ArrayAdapter<Dish> {
 
     ArrayList<Dish> dishes;
     Context context;
 
-    public ListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<Dish> dishes) {
+    public CartListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<Dish> dishes) {
         super(context, resource, dishes);
         this.context = context;
         this.dishes = dishes;
@@ -40,35 +37,24 @@ public class ListAdapter extends ArrayAdapter<Dish> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.row_layout, parent, false);
+        view = inflater.inflate(R.layout.cart_row_layout, parent, false);
 
         final Dish dish = dishes.get(position);
 
         Log.d("Hudson", "getView: " + parent.getId());
         final DishViewHolder dishViewHolder = new DishViewHolder();
-        dishViewHolder.dishName = (TextView) view.findViewById(R.id.dishName);
-        dishViewHolder.dishPrice = (TextView) view.findViewById(R.id.dishPrice);
-        dishViewHolder.dishQuantity = (TextView) view.findViewById(R.id.dishQty);
-        dishViewHolder.dishRating = (TextView) view.findViewById(R.id.dishRating);
-        dishViewHolder.dishImage = (ImageView) view.findViewById(R.id.dishImg);
-        dishViewHolder.minusButt = (Button) view.findViewById(R.id.minusButt);
-        dishViewHolder.plusButt = (Button) view.findViewById(R.id.plusButt);
+        dishViewHolder.dishName = (TextView) view.findViewById(R.id.dishNameCart);
+        dishViewHolder.dishPrice = (TextView) view.findViewById(R.id.dishPriceCart);
+        dishViewHolder.dishQuantity = (TextView) view.findViewById(R.id.dishQtyCart);
+        dishViewHolder.dishRating = (TextView) view.findViewById(R.id.dishRatingCart);
+        dishViewHolder.dishImage = (ImageView) view.findViewById(R.id.dishImgCart);
+        dishViewHolder.removeButt = (Button) view.findViewById(R.id.removeDish);
 
-        dishViewHolder.plusButt.setOnClickListener(new View.OnClickListener() {
+        dishViewHolder.removeButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dishes.get(position).incrementQuantity();
-                Log.d("Hudson", dishes.get(position).getQuantity() + "");
-                dishViewHolder.dishQuantity.setText(dish.getQuantity() + "");
-            }
-        });
-
-        dishViewHolder.minusButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dishes.get(position).decrementQuantity();
-                Log.d("Hudson", dishes.get(position).getQuantity() + "");
-                dishViewHolder.dishQuantity.setText(dish.getQuantity() + "");
+                dishes.remove(position);
+                notifyDataSetChanged();
             }
         });
 
@@ -81,10 +67,9 @@ public class ListAdapter extends ArrayAdapter<Dish> {
 
     }
 
-    private static class DishViewHolder{
+    private static class DishViewHolder {
         TextView dishName, dishRating, dishPrice, dishQuantity;
         ImageView dishImage;
-        Button minusButt, plusButt;
+        Button removeButt;
     }
 }
-

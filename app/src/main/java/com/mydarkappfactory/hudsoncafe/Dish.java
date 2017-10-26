@@ -23,6 +23,10 @@ public class Dish {
         this.quantity++;
     }
 
+    public void decrementQuantity() {
+        this.quantity--;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
