@@ -76,6 +76,11 @@ public class DBHelper extends SQLiteOpenHelper {
                     + "QUANTITY INTEGER, "
                     + "IMG_RES_ID INTEGER);");
 
+            db.execSQL("CREATE TABLE ALL_ORDERS(_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "NAME TEXT, "
+            + "PRICE INTEGER, "
+            + "QUANTITY INTEGER);");
+
             db.execSQL("CREATE TABLE TABLE_OTP(_id INTEGER PRIMARY KEY AUTOINCREMENT, TABLE_NUMBER INTEGER, OTP INTEGER);");
 
             db.execSQL("CREATE TABLE EMAIL_PASSWORD(_id INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT, PASSWORD TEXT);");
