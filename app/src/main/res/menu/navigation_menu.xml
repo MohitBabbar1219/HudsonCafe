@@ -8,14 +8,14 @@
             android:id="@+id/home"
             android:icon="@drawable/home_icon" />
 
-        <item
-            android:title="Pending Orders"
-            android:id="@+id/pendingOrders"
-            android:icon="@drawable/incomplete_icon" />
+        <!--<item-->
+            <!--android:title="Pending Orders"-->
+            <!--android:id="@+id/pendingOrders"-->
+            <!--android:icon="@drawable/incomplete_icon" />-->
 
         <item
-            android:title="Completed orders"
-            android:id="@+id/completedOrders"
+            android:title="Confirmed Orders"
+            android:id="@+id/confirmedOrders"
             android:icon="@drawable/complete_orders_icon" />
 
         <item

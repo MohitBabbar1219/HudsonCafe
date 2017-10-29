@@ -1,5 +1,6 @@
 package com.darkappfactory.hudsoncafe;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -55,11 +56,13 @@ public class MenuActivity extends AppCompatActivity {
                         //TODO
                         Toast.makeText(MenuActivity.this, "Heloo", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.pendingOrders:
+//                    case R.id.pendingOrders:
+//                        //TODO
+//                        break;
+                    case R.id.confirmedOrders:
                         //TODO
-                        break;
-                    case R.id.completedOrders:
-                        //TODO
+                        Intent intent = new Intent(MenuActivity.this, ConfirmedOrdersActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.finalBill:
                         //TODO

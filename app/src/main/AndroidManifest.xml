@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.darkappfactory.hudsoncafe.MainActivity"
+            android:name=".MainActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,18 +21,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.darkappfactory.hudsoncafe.LoginActivity"
+            android:name=".LoginActivity"
             android:noHistory="true" />
         <activity
-            android:name="com.darkappfactory.hudsoncafe.RegisterActivity"
+            android:name=".RegisterActivity"
             android:noHistory="true" />
         <activity
-            android:name="com.darkappfactory.hudsoncafe.MenuActivity"
+            android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.darkappfactory.hudsoncafe.SubmenuActivity" />
-        <activity android:name="com.darkappfactory.hudsoncafe.CartActivity" />
-        <activity android:name="com.darkappfactory.hudsoncafe.OtpActivity"
-            android:noHistory="true"/>
+        <activity android:name=".SubmenuActivity" />
+        <activity android:name=".CartActivity" />
+        <activity
+            android:name=".OtpActivity"
+            android:noHistory="true" />
+        <activity android:name=".ConfirmedOrdersActivity"></activity>
     </application>
 
 </manifest>
