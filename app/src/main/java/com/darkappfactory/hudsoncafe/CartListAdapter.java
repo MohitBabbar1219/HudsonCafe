@@ -1,6 +1,8 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,15 +18,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class CartListAdapter extends ArrayAdapter<Dish> {
+public class CartListAdapter extends ArrayAdapter<CartDish> {
 
-    ArrayList<Dish> dishes;
+    ArrayList<CartDish> dishes;
     Context context;
+    SQLiteDatabase db;
 
-    public CartListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<Dish> dishes) {
+    public CartListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<CartDish> dishes, SQLiteDatabase db) {
         super(context, resource, dishes);
         this.context = context;
         this.dishes = dishes;
+        this.db = db;
     }
 
     @Override
@@ -39,7 +43,7 @@ public class CartListAdapter extends ArrayAdapter<Dish> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.cart_row_layout, parent, false);
 
-        final Dish dish = dishes.get(position);
+        final CartDish dish = dishes.get(position);
 
         Log.d("Hudson", "getView: " + parent.getId());
         final DishViewHolder dishViewHolder = new DishViewHolder();
@@ -54,6 +58,9 @@ public class CartListAdapter extends ArrayAdapter<Dish> {
             @Override
             public void onClick(View view) {
                 dishes.remove(position);
+                ContentValues recordValues = new ContentValues();
+                recordValues.put("QUANTITY", 0);
+                db.update(dish.getTableName(), recordValues, "NAME = ?", new String[]{dish.getName()});
                 notifyDataSetChanged();
             }
         });

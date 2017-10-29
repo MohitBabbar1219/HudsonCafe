@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mydarkappfactory.hudsoncafe.RegisterActivity"
+    tools:context="com.darkappfactory.hudsoncafe.RegisterActivity"
     android:background="@color/appBackground">
 
     <ImageView

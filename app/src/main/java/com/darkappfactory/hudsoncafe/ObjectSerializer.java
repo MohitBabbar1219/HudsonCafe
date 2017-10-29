@@ -1,6 +1,4 @@
-package com.mydarkappfactory.hudsoncafe;
-
-import android.util.Log;
+package com.darkappfactory.hudsoncafe;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

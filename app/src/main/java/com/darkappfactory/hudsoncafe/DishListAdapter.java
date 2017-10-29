@@ -1,6 +1,9 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,18 +19,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Mohit on 10/8/2017.
+ * Created by dragonslayer on 29/10/17.
  */
 
-public class ListAdapter extends ArrayAdapter<Dish> {
-
+public class DishListAdapter extends ArrayAdapter {
     ArrayList<Dish> dishes;
     Context context;
+    String tableName;
+    SQLiteDatabase db;
 
-    public ListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<Dish> dishes) {
+    public DishListAdapter(@NonNull Context context, @LayoutRes int resource, ArrayList<Dish> dishes, String tableName, SQLiteDatabase db) {
         super(context, resource, dishes);
         this.context = context;
         this.dishes = dishes;
+        this.tableName = tableName;
+        this.db = db;
     }
 
     @Override
@@ -59,6 +65,7 @@ public class ListAdapter extends ArrayAdapter<Dish> {
             public void onClick(View view) {
                 dishes.get(position).incrementQuantity();
                 Log.d("Hudson", dishes.get(position).getQuantity() + "");
+                quantityUpdater(position, dish.getQuantity());
                 dishViewHolder.dishQuantity.setText(dish.getQuantity() + "");
             }
         });
@@ -68,6 +75,7 @@ public class ListAdapter extends ArrayAdapter<Dish> {
             public void onClick(View view) {
                 dishes.get(position).decrementQuantity();
                 Log.d("Hudson", dishes.get(position).getQuantity() + "");
+                quantityUpdater(position, dish.getQuantity());
                 dishViewHolder.dishQuantity.setText(dish.getQuantity() + "");
             }
         });
@@ -78,7 +86,12 @@ public class ListAdapter extends ArrayAdapter<Dish> {
         dishViewHolder.dishImage.setImageResource(dish.getImageResId());
         dishViewHolder.dishRating.setText("3");
         return view;
+    }
 
+    private void quantityUpdater(int position, int quantity) {
+        ContentValues recordValues = new ContentValues();
+        recordValues.put("QUANTITY", quantity);
+        db.update(tableName, recordValues, "_id = ?", new String[]{Integer.toString(position + 1)});
     }
 
     private static class DishViewHolder{
@@ -86,5 +99,5 @@ public class ListAdapter extends ArrayAdapter<Dish> {
         ImageView dishImage;
         Button minusButt, plusButt;
     }
-}
 
+}

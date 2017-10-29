@@ -1,23 +1,20 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 public class AppetizerFragment extends Fragment {
 
     View view;
     ListView listView;
+    DishListAdapter dishListAdapter;
 
     public AppetizerFragment() {
 
@@ -31,13 +28,8 @@ public class AppetizerFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listView);
 
-        ListAdapter customAdapter = new ListAdapter(getContext(), R.layout.row_layout, SubmenuActivity.dishesA);
-
-        listView.setAdapter(customAdapter);
-
+        dishListAdapter = new DishListAdapter(getContext(), R.layout.row_layout, SubmenuActivity.dishesA, "APPETIZERS", SubmenuActivity.db);
+        listView.setAdapter(dishListAdapter);
         return view;
-
-
-
     }
 }

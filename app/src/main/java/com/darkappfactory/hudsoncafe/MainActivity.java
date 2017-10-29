@@ -1,19 +1,19 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.YoYo;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     boolean canLogin;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,34 @@ public class MainActivity extends AppCompatActivity {
         final int x = 2;
         final TextView text = (TextView) findViewById(R.id.textView);
 
-        final SharedPreferences sp = this.getSharedPreferences("com.mydarkappfactory.hudsoncafe", Context.MODE_PRIVATE);
+        SQLiteOpenHelper dbHelper = new DBHelper(MainActivity.this);
+        db = dbHelper.getWritableDatabase();
 
-        final String email = sp.getString("email", "-1");
-        final String password = sp.getString("password", "-1");
+        Cursor cursor = db.query("EMAIL_PASSWORD", new String[]{"EMAIL", "PASSWORD"},
+                "_id = 1", null, null, null, null);
+        cursor.moveToFirst();
+
+        final String email = cursor.getString(0);
+        String password = cursor.getString(1);
+
+
+        cursor.close();
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("Hudson", "Sign in status: " + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            Log.d("Hudson", task.getException().toString());
+                        } else {
+                            Toast.makeText(MainActivity.this, "Welcome " + email.substring(0, email.indexOf('@')), Toast.LENGTH_SHORT).show();
+                            canLogin = true;
+                        }
+                    }
+                });
 
 
         new CountDownTimer(1500, 1000) {
@@ -65,29 +90,21 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setProgress(100);
                 Intent intent;
                 if (canLogin) {
-                    intent = new Intent(MainActivity.this, MenuActivity.class);
+                    intent = new Intent(MainActivity.this, OtpActivity.class);
                 } else {
                     intent = new Intent(MainActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);
+                finish();
             }
         }.start();
 
-        mAuth = FirebaseAuth.getInstance();
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Hudson", "Sign in status: " + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.d("Hudson", task.getException().toString());
-                        } else {
-                            Toast.makeText(MainActivity.this, "Welcome " + sp.getString("username", ""), Toast.LENGTH_SHORT).show();
-                            canLogin = true;
-                        }
-                    }
-                });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 }

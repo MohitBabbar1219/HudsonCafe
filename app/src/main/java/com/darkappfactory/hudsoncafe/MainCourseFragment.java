@@ -1,4 +1,4 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,13 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 
 public class MainCourseFragment extends Fragment {
 
     View view;
     ListView listView;
+    DishListAdapter dishListAdapter;
 
     public MainCourseFragment() {
 
@@ -27,10 +26,8 @@ public class MainCourseFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listViewM);
 
-        ListAdapter customAdapter = new ListAdapter(getContext(), R.layout.row_layout, SubmenuActivity.dishesM);
-
-        listView.setAdapter(customAdapter);
-
+        dishListAdapter = new DishListAdapter(getContext(), R.layout.row_layout, SubmenuActivity.dishesM, "MAIN_COURSE", SubmenuActivity.db);
+        listView.setAdapter(dishListAdapter);
         return view;
     }
 }

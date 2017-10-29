@@ -1,4 +1,6 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
+
+import android.database.Cursor;
 
 /**
  * Created by Mohit on 10/8/2017.
@@ -17,6 +19,24 @@ public class Dish {
         this.imageResId = imageResId;
         this.quantity = 0;
         this.rating = 4;
+    }
+
+    public Dish(Cursor cursor) {
+        this.name = cursor.getString(1);
+        this.description = cursor.getString(2);
+        this.price = cursor.getInt(3);
+        this.rating = cursor.getInt(4);
+        this.quantity = cursor.getInt(5);
+        this.imageResId = cursor.getInt(6);
+    }
+
+    public Dish(Dish dish) {
+        this.name = dish.getName();
+        this.description = dish.getDescription();
+        this.price = dish.getPrice();
+        this.rating = dish.getRating();
+        this.quantity = dish.getQuantity();
+        this.imageResId = dish.getImageResId();
     }
 
     public void incrementQuantity() {

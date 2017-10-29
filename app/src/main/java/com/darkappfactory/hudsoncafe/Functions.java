@@ -1,4 +1,4 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

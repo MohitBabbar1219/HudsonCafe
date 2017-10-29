@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.darkappfactory.hudsoncafe.OtpActivity"
+    android:background="@color/appBackground">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/otpLayout"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/otpButt"
+            android:layout_alignStart="@+id/otpEdtText"
+            android:text="@string/at_hudson_cafe"
+            android:textColor="@color/textColor"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/otpEdtText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/animBackground"
+            android:hint="Enter OTP..."
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/textColor"
+            android:textColorHint="#888" />
+
+        <Button
+            android:id="@+id/otpButt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/otpEdtText"
+            android:layout_marginTop="60dp"
+            android:background="@color/logoColor"
+            android:onClick="submitOtp"
+            android:text="Submit" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:id="@+id/otpWaitingLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verifying otp..."
+            android:textColor="@color/textColor"
+            android:id="@+id/verifyText"
+            android:textSize="24sp"/>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Circle"
+            android:layout_below="@id/verifyText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/logoColor" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

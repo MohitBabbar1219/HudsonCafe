@@ -1,4 +1,4 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;

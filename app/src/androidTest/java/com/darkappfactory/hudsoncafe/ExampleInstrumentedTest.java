@@ -1,4 +1,4 @@
-package com.mydarkappfactory.hudsoncafe;
+package com.darkappfactory.hudsoncafe;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
